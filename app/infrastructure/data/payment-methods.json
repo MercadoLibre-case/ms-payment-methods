@@ -1,0 +1,25 @@
+{
+  "payment-methods": {
+    "credit": {
+      "brands": [
+        "Visa",
+        "Mastercard",
+        "Amex",
+        "Elo",
+        "Hipercard"
+      ]
+    },
+    "debit": {
+      "brands": [
+        "Visa Electron",
+        "Maestro"
+      ]
+    },
+    "cash_payment": {
+      "payment_type": [
+        "PIX",
+        "Boleto"
+      ]
+    }
+  }
+}

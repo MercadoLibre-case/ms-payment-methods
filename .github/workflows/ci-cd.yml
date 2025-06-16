@@ -59,6 +59,10 @@ jobs:
           docker tag ms-payment-methods:latest 011706314791.dkr.ecr.ca-central-1.amazonaws.com/meli-challenge/ms-payment-methods:latest
           docker push 011706314791.dkr.ecr.ca-central-1.amazonaws.com/meli-challenge/ms-payment-methods
 
+      - name: Configure Kubernetes credentials (kubectl)
+        run: |
+          aws eks update-kubeconfig --region ca-central-1 --name mercadolibre-case
+
       - name: Deploy to EKS
         run: |
           kubectl apply -f k8s/deployment.yaml

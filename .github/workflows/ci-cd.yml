@@ -1,10 +1,13 @@
-name: Run Tests and Upload Coverage
+name: Run Tests, Build, Push and Deploy
 
 on:
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  repository_dispatch:
+    types: [ deploy ]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -34,6 +37,7 @@ jobs:
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+
   deploy:
     needs: test
     runs-on: ubuntu-latest
@@ -46,7 +50,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ca-central-1 # ou sua região
+          aws-region: ca-central-1
 
       - name: Login to Amazon ECR
         run: |

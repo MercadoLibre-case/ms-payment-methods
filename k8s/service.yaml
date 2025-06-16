@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: ms-payment-service
   labels:
-    app: ms-payment
+    app: ms-payment-service
 spec:
   selector:
-    app: ms-payment
+    app: ms-payment-service
   ports:
     - protocol: TCP
       port: 8070

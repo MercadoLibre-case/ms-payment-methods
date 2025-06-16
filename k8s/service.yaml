@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ms-payment-service
+  labels:
+    app: ms-payment
+spec:
+  selector:
+    app: ms-payment
+  ports:
+    - protocol: TCP
+      port: 8070
+      targetPort: 8070
+  type: ClusterIP

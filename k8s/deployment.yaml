@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ms-payment-service
+  labels:
+    app: ms-payment-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ms-payment-service
+  template:
+    metadata:
+      labels:
+        app: ms-payment-service
+    spec:
+      containers:
+        - name: ms-payment-service
+          image: 011706314791.dkr.ecr.ca-central-1.amazonaws.com/meli-challenge/ms-payment-methods:latest
+          ports:
+            - containerPort: 8070
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+          readinessProbe:
+            httpGet:
+              path: /docs
+              port: 8070
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /docs
+              port: 8070
+            initialDelaySeconds: 15
+            periodSeconds: 20
+      imagePullSecrets:
+        - name: ecr-secret
